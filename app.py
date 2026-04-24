@@ -1,89 +1,105 @@
 import streamlit as st
+import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 from scipy.stats import norm
 
 # --- PAGE CONFIGURATION ---
-st.set_page_config(page_title="Safety Stock Optimizer", layout="wide")
+st.set_page_config(page_title="Inventory Strategy Optimizer", layout="wide")
 
-# --- TITLES AND TEXT ---
-st.title("📦 Supply Chain: Safety Stock Optimizer")
-st.markdown("""
-This model links **Forecast Accuracy**, **Target Customer Service Level**, and **Safety Stock**. 
-Adjust the parameters in the sidebar to see the impact on your required inventory.
-""")
+# --- CUSTOM FUNCTIONS ---
+def calculate_ss(row, forecast_acc):
+    """Calculates Safety Stock for a single row."""
+    # Z-score from Service Level
+    z = norm.ppf(row['Targeted service level'] / 100)
+    # Sigma (Demand Volatility) estimated from Forecast Accuracy
+    sigma = row['Daily volume'] * (1 - (forecast_acc / 100))
+    # SS = Z * Sigma * sqrt(LT)
+    ss = z * sigma * np.sqrt(row['Lead-time to customer (days)'])
+    return max(0, int(ss))
 
-# --- SIDEBAR INPUTS ---
-st.sidebar.header("Model Parameters")
+# --- TITLE & DESCRIPTION ---
+st.title("📦 Multi-Category Safety Stock Optimizer")
 
-# Updated max_value to 200000
-avg_demand = st.sidebar.number_input("Average Period Demand (units)", min_value=10, max_value=200000, value=1000, step=10)
-lead_time = st.sidebar.number_input("Lead Time (periods)", min_value=1, max_value=365, value=7, step=1)
+# --- THEORY SECTION (How it's calculated) ---
+with st.expander("📚 How is Safety Stock calculated? (The Formula)"):
+    st.markdown(r"""
+    The model uses the **Normal Distribution Lead-Time Demand** formula to link your parameters:
+    
+    $$SS = Z \times \sigma_{d} \times \sqrt{LT}$$
+    
+    **Where:**
+    * **$Z$ (Service Factor):** The number of standard deviations required to meet your **Targeted Service Level**. (e.g., 95% service level $\approx$ 1.645).
+    * **$\sigma_{d}$ (Demand Volatility):** Calculated here as $Daily Volume \times (1 - Forecast Accuracy)$. It represents the uncertainty in your demand.
+    * **$LT$ (Lead Time):** The duration (in days) between placing an order and receiving it.
+    
+    **The Logic:** If you improve **Forecast Accuracy**, $\sigma_{d}$ drops, which linearly reduces Safety Stock. If you increase **Service Level**, $Z$ increases exponentially as you approach 100%, causing a sharp spike in inventory.
+    """)
 
-st.sidebar.markdown("---")
-st.sidebar.subheader("Adjustable Levers")
+# --- INITIAL DATA (From your image) ---
+initial_data = {
+    "Category": ["Premium", "Premium", "Premium", "Mid-range", "Mid-range", "Budget", "Budget"],
+    "Season": ["All Season", "Summer", "Winter", "All Season", "Summer", "All Season", "Winter"],
+    "Lead-time to customer (days)": [15, 18, 14, 15, 18, 15, 14],
+    "Daily volume": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+    "Targeted service level": [94.0, 95.0, 50.0, 85.0, 85.0, 80.0, 50.0]
+}
+df_init = pd.DataFrame(initial_data)
 
-# Sliders for the interactive parameters
-forecast_accuracy = st.sidebar.slider("Forecast Accuracy (%)", min_value=50.0, max_value=99.0, value=80.0, step=1.0) / 100
-service_level = st.sidebar.slider("Target Service Level (%)", min_value=80.0, max_value=99.9, value=95.0, step=0.1) / 100
+# --- USER INPUTS ---
+st.sidebar.header("Global Levers")
+# Global Forecast Accuracy affects the Sigma calculation for all rows
+global_fa = st.sidebar.slider("Current Forecast Accuracy (%)", 50.0, 99.0, 80.0, 0.5)
 
-# --- CALCULATIONS ---
-# Calculate Z-score based on service level
-z_score = norm.ppf(service_level)
+st.subheader("1. Edit Your Product Categories")
+st.info("Edit the 'Daily volume' or 'Targeted service level' directly in the table below.")
+edited_df = st.data_editor(df_init, num_rows="dynamic", use_container_width=True)
 
-# Approximate standard deviation of error based on forecast accuracy
-sigma_d = avg_demand * (1 - forecast_accuracy)
+# Perform Calculations
+edited_df['Required Safety Stock'] = edited_df.apply(lambda row: calculate_ss(row, global_fa), axis=1)
 
-# Calculate Safety Stock
-safety_stock = z_score * sigma_d * np.sqrt(lead_time)
-
-# --- RESULTS DISPLAY ---
-col1, col2, col3 = st.columns(3)
-col1.metric("Required Safety Stock", f"{int(safety_stock):,} units")
-col2.metric("Target Service Level", f"{service_level*100:.1f}%")
-col3.metric("Forecast Accuracy", f"{forecast_accuracy*100:.1f}%")
-
+# --- METRICS SUMMARY ---
 st.markdown("---")
+total_ss = edited_df['Required Safety Stock'].sum()
+avg_sl = edited_df['Targeted service level'].mean()
+st.metric("Total Network Safety Stock", f"{total_ss:,} units", help="Sum of safety stock across all rows above")
 
 # --- 3D VISUALIZATION ---
-st.subheader("Impact Visualization")
-st.markdown("This 3D surface shows how Safety Stock (Vertical Z-Axis) reacts to different combinations of Service Level and Forecast Accuracy.")
+st.subheader("2. Impact Visualization (Average Scenario)")
 
-# Generate arrays for the axes
-fa_range = np.linspace(0.50, 0.99, 50)
-csl_range = np.linspace(0.80, 0.999, 50)
+# Use averages from the table for the 3D surface context
+avg_vol = edited_df['Daily volume'].mean()
+avg_lt = edited_df['Lead-time to customer (days)'].mean()
 
-# Create a meshgrid
-FA, CSL = np.meshgrid(fa_range, csl_range)
+fa_range = np.linspace(50, 99, 50)
+sl_range = np.linspace(80, 99.9, 50)
+FA, SL = np.meshgrid(fa_range, sl_range)
 
-# Calculate Safety Stock for every point on the grid
-Z_scores = norm.ppf(CSL)
-Sigma_D = avg_demand * (1 - FA)
-SS_Grid = Z_scores * Sigma_D * np.sqrt(lead_time)
+# Calculation for Surface
+Z_grid = norm.ppf(SL / 100)
+Sigma_grid = avg_vol * (1 - (FA / 100))
+SS_surface = Z_grid * Sigma_grid * np.sqrt(avg_lt)
 
-# Plotly 3D Surface with updated hovertemplate
 fig = go.Figure(data=[go.Surface(
-    z=SS_Grid, 
-    x=FA * 100, 
-    y=CSL * 100,
+    z=SS_surface, x=fa_range, y=sl_range,
     colorscale='Viridis',
-    colorbar_title='Safety Stock',
     hovertemplate='<b>Forecast Accuracy:</b> %{x:.1f}%<br>' +
                   '<b>Service Level:</b> %{y:.1f}%<br>' +
                   '<b>Safety Stock:</b> %{z:,.0f} units<extra></extra>'
 )])
 
-# Updated dimensions (width and height)
 fig.update_layout(
-    title='Safety Stock vs. Service Level & Forecast Accuracy',
+    title=f"Sensitivity Analysis (Based on Avg Volume: {int(avg_vol)})",
     scene=dict(
-        xaxis_title='Forecast Accuracy (%)',
-        yaxis_title='Service Level (%)',
-        zaxis_title='Safety Stock (Units)'
+        xaxis_title="Forecast Accuracy (%)",
+        yaxis_title="Service Level (%)",
+        zaxis_title="Safety Stock"
     ),
-    width=1200, 
-    height=900, 
-    margin=dict(l=65, r=50, b=65, t=90)
+    width=1200, height=800
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
+# --- DOWNLOAD DATA ---
+st.download_button("Export Results to CSV", edited_df.to_csv(index=False), "inventory_plan.csv", "text/csv")
+
