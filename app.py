@@ -16,7 +16,8 @@ Adjust the parameters in the sidebar to see the impact on your required inventor
 # --- SIDEBAR INPUTS ---
 st.sidebar.header("Model Parameters")
 
-avg_demand = st.sidebar.number_input("Average Period Demand (units)", min_value=10, max_value=10000, value=1000, step=10)
+# Updated max_value to 200000
+avg_demand = st.sidebar.number_input("Average Period Demand (units)", min_value=10, max_value=200000, value=1000, step=10)
 lead_time = st.sidebar.number_input("Lead Time (periods)", min_value=1, max_value=365, value=7, step=1)
 
 st.sidebar.markdown("---")
@@ -60,15 +61,19 @@ Z_scores = norm.ppf(CSL)
 Sigma_D = avg_demand * (1 - FA)
 SS_Grid = Z_scores * Sigma_D * np.sqrt(lead_time)
 
-# Plotly 3D Surface
+# Plotly 3D Surface with updated hovertemplate
 fig = go.Figure(data=[go.Surface(
     z=SS_Grid, 
     x=FA * 100, 
     y=CSL * 100,
     colorscale='Viridis',
-    colorbar_title='Safety Stock'
+    colorbar_title='Safety Stock',
+    hovertemplate='<b>Forecast Accuracy:</b> %{x:.1f}%<br>' +
+                  '<b>Service Level:</b> %{y:.1f}%<br>' +
+                  '<b>Safety Stock:</b> %{z:,.0f} units<extra></extra>'
 )])
 
+# Updated dimensions (width and height)
 fig.update_layout(
     title='Safety Stock vs. Service Level & Forecast Accuracy',
     scene=dict(
@@ -76,12 +81,9 @@ fig.update_layout(
         yaxis_title='Service Level (%)',
         zaxis_title='Safety Stock (Units)'
     ),
-    width=900,
-    height=700,
+    width=1200, 
+    height=900, 
     margin=dict(l=65, r=50, b=65, t=90)
 )
 
 st.plotly_chart(fig, use_container_width=True)
-
-
-
