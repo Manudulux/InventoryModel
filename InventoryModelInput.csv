@@ -1,100 +1,100 @@
 ﻿Category,Season,SubCategory,Lead-time to customer (days),Daily volume,Targeted service level
-Premium,All Season,13,45,1000,50%
-Premium,All Season,14,45,1000,50%
-Premium,All Season,15,45,1000,94%
-Premium,All Season,16,45,1000,96%
-Premium,All Season,17,45,1000,96%
-Premium,All Season,18,45,1000,98%
-Premium,All Season,19,45,1000,98%
-Premium,All Season,20,45,1000,99%
-Premium,All Season,21,45,1000,99%
-Premium,All Season,22,45,1000,99%
-Premium,All Season,23,45,1000,99%
-Premium,Summer,13,45,1000,50%
-Premium,Summer,14,45,1000,50%
-Premium,Summer,15,45,1000,85%
-Premium,Summer,16,45,1000,90%
-Premium,Summer,17,45,1000,90%
-Premium,Summer,18,45,1000,95%
-Premium,Summer,19,45,1000,95%
-Premium,Summer,20,45,1000,97%
-Premium,Summer,21,45,1000,97%
-Premium,Summer,22,45,1000,97%
-Premium,Summer,23,45,1000,97%
-Premium,Winter,13,45,1000,50%
-Premium,Winter,14,45,1000,50%
-Premium,Winter,15,45,1000,85%
-Premium,Winter,16,45,1000,90%
-Premium,Winter,17,45,1000,90%
-Premium,Winter,18,45,1000,95%
-Premium,Winter,19,45,1000,95%
-Premium,Winter,20,45,1000,97%
-Premium,Winter,21,45,1000,97%
-Premium,Winter,22,45,1000,97%
-Premium,Winter,23,45,1000,97%
-Mid-range,All Season,13,45,1000,50%
-Mid-range,All Season,14,45,1000,50%
-Mid-range,All Season,15,45,1000,85%
-Mid-range,All Season,16,45,1000,85%
-Mid-range,All Season,17,45,1000,85%
-Mid-range,All Season,18,45,1000,90%
-Mid-range,All Season,19,45,1000,90%
-Mid-range,All Season,20,45,1000,90%
-Mid-range,All Season,21,45,1000,90%
-Mid-range,All Season,22,45,1000,90%
-Mid-range,All Season,23,45,1000,90%
-Mid-range,Summer,13,45,1000,50%
-Mid-range,Summer,14,45,1000,50%
-Mid-range,Summer,15,45,1000,80%
-Mid-range,Summer,16,45,1000,80%
-Mid-range,Summer,17,45,1000,80%
-Mid-range,Summer,18,45,1000,85%
-Mid-range,Summer,19,45,1000,85%
-Mid-range,Summer,20,45,1000,85%
-Mid-range,Summer,21,45,1000,85%
-Mid-range,Summer,22,45,1000,85%
-Mid-range,Summer,23,45,1000,85%
-Mid-range,Winter,13,45,1000,50%
-Mid-range,Winter,14,45,1000,50%
-Mid-range,Winter,15,45,1000,80%
-Mid-range,Winter,16,45,1000,80%
-Mid-range,Winter,17,45,1000,80%
-Mid-range,Winter,18,45,1000,85%
-Mid-range,Winter,19,45,1000,85%
-Mid-range,Winter,20,45,1000,85%
-Mid-range,Winter,21,45,1000,85%
-Mid-range,Winter,22,45,1000,85%
-Mid-range,Winter,23,45,1000,85%
-Budget,All Season,13,45,1000,50%
-Budget,All Season,14,45,1000,50%
-Budget,All Season,15,45,1000,80%
-Budget,All Season,16,45,1000,80%
-Budget,All Season,17,45,1000,80%
-Budget,All Season,18,45,1000,85%
-Budget,All Season,19,45,1000,85%
-Budget,All Season,20,45,1000,85%
-Budget,All Season,21,45,1000,85%
-Budget,All Season,22,45,1000,85%
-Budget,All Season,23,45,1000,85%
-Budget,Summer,13,45,1000,50%
-Budget,Summer,14,45,1000,50%
-Budget,Summer,15,45,1000,75%
-Budget,Summer,16,45,1000,75%
-Budget,Summer,17,45,1000,75%
-Budget,Summer,18,45,1000,80%
-Budget,Summer,19,45,1000,80%
-Budget,Summer,20,45,1000,80%
-Budget,Summer,21,45,1000,80%
-Budget,Summer,22,45,1000,80%
-Budget,Summer,23,45,1000,80%
-Budget,Winter,13,45,1000,50%
-Budget,Winter,14,45,1000,50%
-Budget,Winter,15,45,1000,75%
-Budget,Winter,16,45,1000,75%
-Budget,Winter,17,45,1000,75%
-Budget,Winter,18,45,1000,80%
-Budget,Winter,19,45,1000,80%
-Budget,Winter,20,45,1000,80%
-Budget,Winter,21,45,1000,80%
-Budget,Winter,22,45,1000,80%
-Budget,Winter,23,45,1000,80%
+Premium,All Season,13,45.38,1,50%
+Premium,All Season,14,45.38,443,50%
+Premium,All Season,15,45.38,2299,94%
+Premium,All Season,16,45.38,4306,96%
+Premium,All Season,17,45.38,3269,96%
+Premium,All Season,18,45.38,1878,98%
+Premium,All Season,19,45.38,1012,98%
+Premium,All Season,20,45.38,353,99%
+Premium,All Season,21,45.38,66,99%
+Premium,All Season,22,45.38,6,99%
+Premium,All Season,23,45.38,2,99%
+Premium,Summer,13,45.38,0,50%
+Premium,Summer,14,45.38,405,50%
+Premium,Summer,15,45.38,1999,85%
+Premium,Summer,16,45.38,4963,90%
+Premium,Summer,17,45.38,4875,90%
+Premium,Summer,18,45.38,4490,95%
+Premium,Summer,19,45.38,3170,95%
+Premium,Summer,20,45.38,2004,97%
+Premium,Summer,21,45.38,872,97%
+Premium,Summer,22,45.38,189,97%
+Premium,Summer,23,45.38,25,97%
+Premium,Winter,13,45.38,10,50%
+Premium,Winter,14,45.38,164,50%
+Premium,Winter,15,45.38,917,85%
+Premium,Winter,16,45.38,2644,90%
+Premium,Winter,17,45.38,2177,90%
+Premium,Winter,18,45.38,1989,95%
+Premium,Winter,19,45.38,1984,95%
+Premium,Winter,20,45.38,799,97%
+Premium,Winter,21,45.38,293,97%
+Premium,Winter,22,45.38,53,97%
+Premium,Winter,23,45.38,4,97%
+Mid-range,All Season,13,45.38,0,50%
+Mid-range,All Season,14,45.38,88,50%
+Mid-range,All Season,15,45.38,372,85%
+Mid-range,All Season,16,45.38,521,85%
+Mid-range,All Season,17,45.38,251,85%
+Mid-range,All Season,18,45.38,173,90%
+Mid-range,All Season,19,45.38,37,90%
+Mid-range,All Season,20,45.38,19,90%
+Mid-range,All Season,21,45.38,0,90%
+Mid-range,All Season,22,45.38,4,90%
+Mid-range,All Season,23,45.38,0,90%
+Mid-range,Summer,13,45.38,0,50%
+Mid-range,Summer,14,45.38,194,50%
+Mid-range,Summer,15,45.38,574,80%
+Mid-range,Summer,16,45.38,865,80%
+Mid-range,Summer,17,45.38,534,80%
+Mid-range,Summer,18,45.38,261,85%
+Mid-range,Summer,19,45.38,114,85%
+Mid-range,Summer,20,45.38,45,85%
+Mid-range,Summer,21,45.38,2,85%
+Mid-range,Summer,22,45.38,2,85%
+Mid-range,Summer,23,45.38,0,85%
+Mid-range,Winter,13,45.38,0,50%
+Mid-range,Winter,14,45.38,63,50%
+Mid-range,Winter,15,45.38,255,80%
+Mid-range,Winter,16,45.38,543,80%
+Mid-range,Winter,17,45.38,378,80%
+Mid-range,Winter,18,45.38,156,85%
+Mid-range,Winter,19,45.38,113,85%
+Mid-range,Winter,20,45.38,22,85%
+Mid-range,Winter,21,45.38,3,85%
+Mid-range,Winter,22,45.38,0,85%
+Mid-range,Winter,23,45.38,0,85%
+Budget,All Season,13,45.38,57,50%
+Budget,All Season,14,45.38,1004,50%
+Budget,All Season,15,45.38,1980,80%
+Budget,All Season,16,45.38,2700,80%
+Budget,All Season,17,45.38,1516,80%
+Budget,All Season,18,45.38,695,85%
+Budget,All Season,19,45.38,165,85%
+Budget,All Season,20,45.38,70,85%
+Budget,All Season,21,45.38,0,85%
+Budget,All Season,22,45.38,0,85%
+Budget,All Season,23,45.38,0,85%
+Budget,Summer,13,45.38,178,50%
+Budget,Summer,14,45.38,556,50%
+Budget,Summer,15,45.38,1794,75%
+Budget,Summer,16,45.38,2864,75%
+Budget,Summer,17,45.38,2261,75%
+Budget,Summer,18,45.38,1447,80%
+Budget,Summer,19,45.38,707,80%
+Budget,Summer,20,45.38,355,80%
+Budget,Summer,21,45.38,58,80%
+Budget,Summer,22,45.38,0,80%
+Budget,Summer,23,45.38,0,80%
+Budget,Winter,13,45.38,170,50%
+Budget,Winter,14,45.38,1154,50%
+Budget,Winter,15,45.38,3048,75%
+Budget,Winter,16,45.38,5085,75%
+Budget,Winter,17,45.38,2695,75%
+Budget,Winter,18,45.38,980,80%
+Budget,Winter,19,45.38,528,80%
+Budget,Winter,20,45.38,156,80%
+Budget,Winter,21,45.38,23,80%
+Budget,Winter,22,45.38,0,80%
+Budget,Winter,23,45.38,0,80%
